@@ -34,17 +34,10 @@ int main(int argc, char *argv[])
 
     vita2d_init();
 
-    auto tid = sceKernelCreateThread("music_thread", [] (unsigned int a, void *b) -> int {
-        gSoloud.init();
-        gWave.load("app0:/res/haha.ogg");
-        for(;;) {
-            gSoloud.play(gWave);
-            sceKernelDelayThread(5166666);
-        }
-        sceKernelExitThread(0);
-        return 0;
-    }, 0x10000100, 0x10000, 0, 0, 0);
-    sceKernelStartThread(tid, 0, 0);
+    gSoloud.init();
+    gWave.load("app0:/res/haha.ogg");
+    gWave.setLooping(true);
+    gSoloud.play(gWave);
     
     vita2d_texture *_1 = vita2d_load_PNG_file("app0:res/1.png");
     vita2d_texture *_2 = vita2d_load_PNG_file("app0:res/2.png");
