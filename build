@@ -1,0 +1,45 @@
+#!/bin/bash
+
+VITA_IP="10.0.0.8"
+TITLEID="GVITAV004"
+
+rebuild() {
+	rm -rf out && mkdir out && cd out && cmake .. && cd .. && make -C out
+}
+
+build() {
+	if [ -d "$(pwd)/out/" ]; then
+		make -C out/
+	else
+		rebuild
+	fi
+}
+
+clean()  {
+	rm -rf out
+}
+
+send() {
+	curl -s -T out/eboot.bin ftp://$VITA_IP:1337/ux0:/app/$TITLEID/
+}
+
+vpksend() {
+	curl -T out/$TITLEID.vpk ftp://$VITA_IP:1337/ux0:/
+}
+
+if [ -z $1 ]; then
+	build
+elif [ $1 == "r" ]; then
+	rebuild
+elif [ $1 == "i1" ]; then
+	rebuild
+	vpksend
+elif [ $1 == "u1" ]; then
+	rebuild
+	send
+elif [ $1 == "s1" ]; then
+	build
+	send
+elif [ $1 == "c" ]; then
+	clean
+fi
