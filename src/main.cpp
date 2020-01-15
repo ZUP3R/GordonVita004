@@ -61,6 +61,10 @@ int main(int argc, char *argv[])
 
         sceAVConfigSetSystemVol(30);
 
+        int brightness = 0xFFFF;
+        sceAVConfigGetDisplayMaxBrightness(&brightness);
+        sceAVConfigSetDisplayBrightness(brightness);
+
         SceCtrlData pad;
         sceCtrlPeekBufferPositive(0, &pad, 1);
         if(pad.buttons == (SCE_CTRL_LTRIGGER | SCE_CTRL_RTRIGGER | SCE_CTRL_CROSS))
