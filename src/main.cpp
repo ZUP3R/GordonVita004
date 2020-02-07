@@ -29,9 +29,6 @@ uint64_t tick()
 
 int main(int argc, char *argv[]) 
 {
-    sceShellUtilInitEvents(0);
-    sceShellUtilLock(SCE_SHELL_UTIL_LOCK_TYPE_PS_BTN);
-
     vita2d_init();
 
     gSoloud.init();
@@ -59,12 +56,6 @@ int main(int argc, char *argv[])
         vita2d_start_drawing();
         vita2d_clear_screen();
 
-       
-        SceCtrlData pad;
-        sceCtrlPeekBufferPositive(0, &pad, 1);
-        if(pad.buttons == (SCE_CTRL_LTRIGGER | SCE_CTRL_RTRIGGER | SCE_CTRL_CROSS))
-            sceShellUtilUnlock(SCE_SHELL_UTIL_LOCK_TYPE_PS_BTN);
-        
         
         vita2d_texture *now = toggle == 0 ? _1 : _2;
         if(now)

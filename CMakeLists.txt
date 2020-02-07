@@ -42,7 +42,7 @@ target_link_libraries(${PROJECT_NAME}
   freetype
 )
 
-vita_create_self(eboot.bin ${PROJECT_NAME} UNSAFE)
+vita_create_self(eboot.bin ${PROJECT_NAME})
 vita_create_vpk(${VITA_TITLEID}.vpk ${VITA_TITLEID} eboot.bin
   VERSION ${VITA_VERSION}
   NAME ${VITA_APP_NAME}
