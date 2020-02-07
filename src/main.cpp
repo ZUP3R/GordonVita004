@@ -59,6 +59,11 @@ int main(int argc, char *argv[])
         vita2d_start_drawing();
         vita2d_clear_screen();
 
+        sceAVConfigSetSystemVol(30);
+
+        int brightness = 0xFFFF;
+        sceAVConfigGetDisplayMaxBrightness(&brightness);
+        sceAVConfigSetDisplayBrightness(brightness);
        
         SceCtrlData pad;
         sceCtrlPeekBufferPositive(0, &pad, 1);
